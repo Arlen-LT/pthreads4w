@@ -8,33 +8,10 @@ project (PTHREADS4W
 include (GNUInstallDirs)
 set (CMAKE_DEBUG_POSTFIX d)
 
-if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-	set (DEFAULT_BUILD_TYPE "Debug")
-endif()
-
 if (MSVC)
 	set (COMPILER_INDICATOR "V")
 else()
 	set (COMPILER_INDICATOR "G")
-endif()
-
-# Set the possible values of build type for cmake-gui
-if (CMAKE_CONFIGURATION_TYPES)
-	set (CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE
-		STRING "Semicolon separated list of supported configuration types, only supports debug and release, anything else will be ignored" FORCE
-	)
-
-	set_property (CACHE CMAKE_CONFIGURATION_TYPES PROPERTY STRINGS
-		"Debug" "Release"
-	)
-endif()
-
-if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-	message (STATUS "Setting build type to '${DEFAULT_BUILD_TYPE}' as none was specified.")
-
-	set (CMAKE_BUILD_TYPE "${DEFAULT_BUILD_TYPE}" CACHE
-		STRING "Choose the type of build." FORCE
-	)
 endif()
 
 option (PTHREADS4W_TEST "Run Tests after compile" OFF)
